@@ -6,7 +6,8 @@ bits 32
 start:
     ; We point at the top of our stack: http://www.c-jump.com/CIS77/ASM/Stack/S77_0040_esp_register.htm
     mov esp, stack_top
-
+    mov edi, ebx       ; Move Multiboot info pointer to edi (first pararameter in Linux is left there by convention)
+        
     call check_multiboot
     call check_cpuid
     call check_long_mode
@@ -169,5 +170,6 @@ p3_table:
 p2_table:
     resb 4096
 stack_bottom:
-    resb 64
+    ;; 4 pages
+    resb 4096 * 4
 stack_top:
