@@ -12,6 +12,8 @@ extern crate rlibc;
 extern crate volatile;
 extern crate spin;
 extern crate multiboot2;
+#[macro_use]
+extern crate bitflags;
 
 #[no_mangle]
 pub extern fn rust_main(multiboot_information_address: usize) {

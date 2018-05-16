@@ -114,6 +114,12 @@ set_up_page_tables:
     ; map each P2 entry to a huge 2MiB page
     mov ecx, 0         ; counter variable
 
+memory_recursive_mapping:
+    ; we point last P4 entry to itself
+    mov eax, p4_table
+    or eax, 0b11 ; present + writable
+    mov [p4_table + 511 * 8], eax    
+        
 .map_p2_table:
     ; map ecx-th P2 entry to a huge page that starts at address 2MiB*ecx
     mov eax, 0x200000  ; 2MiB
